@@ -14,6 +14,10 @@ The course is designed to be accessible to graduate students and researchers of 
 
 ### Overleaf lecture notes: the lectures notes of the course has freely [avaliable on overleaf](https://www.overleaf.com/16367764mcnrxmkntrkf)
 
+### Exercices: all the assigments and thier correction are [avaliable on github](https://github.com/sphinxteam/DukeLecture2018/tree/master/exercices)
+
+
+### Jupyter notebook tutorials: all the tutorial are [avaliable on github](https://github.com/sphinxteam/DukeLecture2018/tree/master/AMP-tuto)
 
 ### Download the [poster annoucement](Screenshot 2019-03-18 at 16.26.19.png)
 
