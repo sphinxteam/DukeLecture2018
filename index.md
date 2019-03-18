@@ -1,8 +1,12 @@
-## Welcome to GitHub Pages
+## Statistical Physics For Optimization and Learning, Florent Krzakala & Lenka Zdeborová, Math 690-40
 
-You can use the [editor on GitHub](https://github.com/sphinxteam/DukeLecture2018/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Interest in the methods and concepts of statistical physics is rapidly growing in fields as diverse as theoretical computer science, probability, machine learning, discrete mathematics, optimization and compressed sensing. This course will cover this rich and active interdisciplinary research landscape.
+More specifically, we will review the statistical physics approach to problems ranging from graph theory (percolation, community detection) to discrete optimization and constraint satisfaction (satisfiability, coloring, bisection) and to inference and learning problems (learning in neural networks, clustering of data and of networks, compressed sensing or sparse linear regression, low-rank matrix and tensor factorization, etc.).
+We will expose theoretical methods of analysis (replica, cavity, ...) algorithms (message passing, spectral methods, ...), discuss concrete applications, highlight rigorous justifications as well as present the connection to the physics of glassy and disordered systems.
+The course is designed to be accessible to graduate students and researchers of all natural science and engineering disciplines with a basic knowledge of probability and analysis. Advanced training in any of the above fields is not requisite.
+References:
+Information, Physics and Computation (Oxford Graduate Texts), 2009, M. Mézard, A. Montanari
+Statistical Physics of inference: Thresholds and algorithms, Advances in Physics 65, 5 2016, L. Zdeborová & F. Krzakala
 
 ### Markdown
 
@@ -14,24 +18,3 @@ Syntax highlighted code block
 # Header 1
 ## Header 2
 ### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/sphinxteam/DukeLecture2018/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
