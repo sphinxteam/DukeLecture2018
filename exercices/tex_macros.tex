@@ -1,0 +1,147 @@
+\usepackage{amsmath,amssymb,amsfonts,amsthm, mathrsfs}
+\usepackage{mathtools,bbm}
+\usepackage{IEEEtrantools}
+\usepackage[]{algorithm2e}
+\usepackage{tikz,pgfplots,tkz-graph}
+\usepackage{ifthen,calc}
+\usepackage{listings,hyperref,float}
+\usepackage{epsfig,epstopdf,graphicx}
+\usepackage{enumerate}
+
+\pgfplotsset{compat=newest}
+\usetikzlibrary{positioning,matrix}
+\interdisplaylinepenalty=2500
+
+% Page settings
+% \setlength{\oddsidemargin}{0 in}
+% \setlength{\evensidemargin}{0 in}
+% \setlength{\topmargin}{-0.6 in}
+% \setlength{\textwidth}{6.5 in}
+% \setlength{\textheight}{8.5 in}
+% \setlength{\headsep}{0.75 in}
+% \setlength{\parindent}{0 in}
+% \setlength{\parskip}{0.1 in}
+
+% Markov symbol X -o- Y
+\newcommand{\markov}{\mathrel{\multimap}\joinrel\mathrel{-}\joinrel\mathrel{\mkern-6mu}\joinrel\mathrel{-}}
+% Independent & not independent symbol X _||_ Y
+\newcommand{\indep}{\mathrel{\bot}\joinrel\mathrel{\mkern-5mu}\joinrel\mathrel{\bot}}
+\newcommand{\dep}{\centernot\indep}
+% i.i.d.
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+% Integration d
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+% Single braces
+\newcommand{\agbrs}[1]{\left\langle #1 \right\rangle}	% angle braces,  	< x >
+\newcommand{\rdbrs}[1]{\left( #1 \right)}				% round braces,  	( x )
+\newcommand{\sqbrs}[1]{\left\lbrack #1 \right\rbrack}	% square braces, 	[ x ]
+\newcommand{\clbrs}[1]{\left\lbrace #1 \right\rbrace}	% curly braces, 	{ x }
+
+% Delimited braces
+\newcommand{\agbrsv}[2]{\left\lange #1 \,\middle|\, #2 \right\rangle}	% angle braces with delimiter |,  	< x | y >, inner product
+\newcommand{\rdbrsv}[2]{\left( #1 \,\middle|\, #2 \right)}				% round braces with delimiter |,  	( x | y ), conditional probability
+\newcommand{\sqbrsv}[2]{\left\lbrack #1 \,\middle|\, #2 \right\rbrack}	% square braces with delimiter |,  	[ x | y ], conditional expectation
+\newcommand{\clbrsv}[2]{\left\lbrace #1 \,\middle|\, #2 \right\rbrace}	% curly braces with delimiter |,  	{ x | y }, set
+
+% Short for underline and overline
+\newcommand{\udl}[1]{\underline{#1}}
+\newcommand{\ovl}[1]{\overline{#1}}
+
+% Derivative and partial derivation
+\newcommand{\fracd}[2]{ \frac{\mathrm{d} #1}{\mathrm{d} #2} }
+\newcommand{\fracp}[2]{ \frac{\partial #1}{\partial #2} }
+
+% Absolute value, norm, ceil, floor, and evaluation
+\newcommand{\abs}[1]{\left| #1 \right|}		% Absolute value, 	| x |
+\newcommand{\norm}[1]{\left\| #1 \right\|}	% Norm, 			|| x ||
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\eval}[1]{\left. #1 \right|}	% Evaluation, 		f(x) |_{x=x0}
+
+% Definition equal sign
+\newcommand{\defeq}{\vcentcolon=}   % :=
+\newcommand{\eqdef}{=\vcentcolon}   % =:
+\newcommand{\texteq}[1]{\stackrel{#1}{=\joinrel=\joinrel=}}   % use for change of variable
+
+% Inverse hyperbolic functions
+\DeclareMathOperator\arcsinh{arcsinh}
+\DeclareMathOperator\arccosh{arccosh}
+\DeclareMathOperator\arctanh{arctanh}
+\DeclareMathOperator\atanh{atanh}
+\DeclareMathOperator\sech{sech}
+
+% argmax and argmin
+\newcommand\limit[1]{\underset{#1}{\lim}\,}
+\newcommand\argmax[1]{\mathrm{arg}\,\underset{#1}{\max}\,}
+\newcommand\argmin[1]{\mathrm{arg}\,\underset{#1}{\min}\,}
+
+% Matrices
+\newcommand*\pmtx[1]{\begin{pmatrix}#1\end{pmatrix}}			% Matrix with round braces
+\newcommand*\bmtx[1]{\begin{bmatrix}#1\end{bmatrix}}			% Matrix with square braces
+\newcommand*\vmtx[1]{\begin{vmatrix}#1\end{vmatrix}}			% Determinant of matrix
+\newcommand*\spmtx[1]{\rdbrs{\begin{smallmatrix}#1\end{smallmatrix}}}	% Small matrix with round braces
+\newcommand*\sbmtx[1]{\sqbrs{\begin{smallmatrix}#1\end{smallmatrix}}}	% Small matrix with square braces
+\newcommand*\svmtx[1]{\abs{\begin{smallmatrix}#1\end{smallmatrix}}}		% Determinant of small matrix
+\newcommand{\sizecorr}[1]{\makebox[0cm]{\phantom{$\displaystyle #1$}}}	% Get size of an expression
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{assumption}[theorem]{Assumption}
+
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{example*}{Example}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{problem*}{Problem}
+
+% Solution environment
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% Short for boldsymbol
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+
+% Other frequent used operators
+\def\Var{\mathsf{Var}}
+\def\Cov{\mathsf{Cov}}
+\def\coeff{\mathsf{coeff}}
+\def\Tr{\mathsf{Tr}}
+\def\rank{\mathsf{rank}}
+\def\diag{\mathsf{diag}}
+\def\mse{\mathsf{mse}}
+\def\mmse{\mathsf{mmse}}
+
+\def\ee{\mathbbm{e}}
+\def\ii{\mathbbm{i}}
+\def\EE{\mathsf{E}}
+\def\FF{\mathsf{F}}
+\def\SS{\mathsf{S}}
+\def\UU{\mathsf{U}}
+\def\xx{\mathsf{x}}
+\def\pprime{{\prime\prime}}
+
+\newcommand{\KL}[2]{D\left( #1 \,\middle|\middle|\, #2 \right)}%                   ( | )
+
+\makeatletter
+\newcommand\ztag[1]{%
+\def\@currentlabel{#1}%
+\gdef\tmp{%
+\addtocounter{equation}{-1}%
+\def\theequation{#1}}%
+\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup
+\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup
+\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup
+\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup
+\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup\aftergroup
+\aftergroup
+\tmp\IEEEyesnumber}

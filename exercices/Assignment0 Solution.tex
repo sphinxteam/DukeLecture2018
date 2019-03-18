@@ -1,0 +1,230 @@
+\documentclass[a4paper,oneside,12pt]{article}
+\usepackage{graphics,multicol}
+\usepackage[latin1]{inputenc}
+\usepackage[a4paper,margin=2cm,lmargin=2cm,headheight=1pt]{geometry}
+\usepackage{fancyhdr}
+\input{tex_macros}
+
+\pagestyle{empty}
+\begin{document}
+
+\noindent
+
+\begin{tabular}{lcr}
+  Duke University & & Math 690-40 \\  
+  Homework zero & \hspace{6.3cm} & F. Krzakala and L. Zdeborova\\ \hline
+\end{tabular}
+
+\begin{center}
+  {\Large {\bf Graphical models and the Ising model}}
+\end{center}
+
+\subsection*{Representing problems by graphical models}
+
+Write the following problems (a) in terms of a probability distribution and (b) in terms of a graphical model by drawing an example of the corresponding factor graph. 
+
+\begin{itemize}
+\item[(1)]{\bf p-spin model} 
+
+    One model that is commonly studied in physics is the so-called Ising $3$-spin
+    model. The Hamiltonian of this model is written as 
+    \begin{equation}
+        {\cal H} (\{S_i \}_{i=1}^N) = - \sum_{(ijk)\in E} J_{ijk} S_i S_j S_k  - \sum_{i=1}^N h_i S_i
+    \end{equation}
+    where $E$ is a given set of (unordered) triplets $i \neq j \neq k$,
+    $J_{ijk}$ is the interaction strength for the triplet $(ijk)\in E$, and
+    $h_i$ is a magnetic field on spin $i$. The spins are Ising, which in
+    physics means $S_i \in \{+1, -1 \}$.  
+
+    \begin{solution} $\,$ 
+    \begin{enumerate}[(a)]
+    \item   
+            The corresponding Boltzmann distribution of the given model is
+            \begin{IEEEeqnarray}{rCl}
+                P( \clbrs{ S_i }_{i=1}^N )
+                &=& \frac{1}{Z(\beta)} \exp \rdbrs{ -\beta \mathcal{H} ( \clbrs{ S_i }_{i=1}^N )} \IEEEnonumber \\
+                &=& \frac{1}{Z(\beta)} \sqbrs{ \prod_{(ijk) \in E} \ee^{\beta J_{ijk} S_i S_j S_k} } \sqbrs{ \prod_{i=1}^N \ee^{\beta h_i S_i} }, \label{eq:1_1}
+            \end{IEEEeqnarray}
+            where $ \beta $ is the inverse temperature and
+            \begin{equation*}
+                  Z(\beta) = \sum_{\clbrs{ S_i }_{i=1}^N} \exp \rdbrs{ -\beta \mathcal{H} ( \clbrs{ S_i }_{i=1}^N )},
+            \end{equation*} 
+            is the partition function under inverse temperature $ \beta $ to guarantee that $ P( \clbrs{ S_i }_{i=1}^N ) $ sum to one for all possible configurations.
+    \item   
+            From eqn~\ref{eq:1_1} we can see the probability distribution (without normalization) is the product of $ \abs{E} $ interaction terms and $ N $ local magnetic field terms.
+
+            For example, consider a $ 3 $-spin model with $ N = 6 $ spins and triplet set $ E = \clbrs{ (123), (245), (356), (456) } $, the corresponding factor graph looks like
+            \begin{center}
+            \tikzstyle{var}=[circle, draw, thick, minimum size=25pt, inner sep=0pt, fill=yellow]
+            \tikzstyle{fun}=[rectangle, draw, thick, minimum size=25pt, inner sep=0pt, fill=cyan]
+            \tikzstyle{edge} = [draw, thick, -]
+            \begin{tikzpicture}[scale=1, auto, swap]
+                \def\mysep{2}
+                \foreach \i in {1,...,6} {
+                    \node[var] (S\i) at (\i*\mysep, 0) {$ S_\i $};
+                    \node[fun] (h\i) at (\i*\mysep, 0.75 * \mysep) {$ h_\i $};
+                    \path[edge] (S\i) -- (h\i);
+                }
+                \foreach \i/\idx in {1/126, 2/234, 3/345, 4/456}
+                    \node[fun] (J\idx) at (5/3*\i*\mysep-4/3, -1.5*\mysep) {$ J_{\idx} $};
+                \foreach \source/ \dest in {  J126/S1, J126/S2, J126/S6,
+                                              J234/S2, J234/S3, J234/S4,
+                                              J345/S3, J345/S4, J345/S5,
+                                              J456/S4, J456/S5, J456/S6}
+                    \path[edge] (\source) -- (\dest);
+            \end{tikzpicture}
+            \end{center}
+    \end{enumerate}
+    \end{solution}
+    
+
+\item[(2)] {\bf Independent set problem}
+
+    Independent set is a problem defined and studied in combinatorics and
+    graph theory. Given a (unweighted, undirected) graph $G(V,E)$, an independent set $S \subseteq V$ is
+    defined as a
+    subset of nodes such that if $i \in S$ then for all $j
+    \in \partial i$ we have $j \notin S$. In other words in for all $(ij)\in E$
+    only $i$ or $j$ can belong to the independent set. 
+
+    (a) Write a probability distribution that is uniform over all
+    independent sets on a given graph. (b) Write a probability distribution
+    that gives a larger weight to larger independent sets, where the
+    size of an independent set is simply $|S|$. 
+
+    \begin{solution} $\,$ 
+    \begin{enumerate}[(a)]
+    \item   
+            First let's construct the factor graph for this problem.
+            Denote $ N = \abs{V} $ as the number of nodes in the graph, we can use a length-$ N $ spin configuration $ \udl{\sigma}^S $ to represent any set $ S \subseteq V $ by
+            \begin{equation*}
+                \sigma_i^S = 
+                \begin{cases}
+                    +1, &\text{ if node } i \text{ is in } S\\
+                    -1, &\text{ if node } i \text{ is not in } S\\
+                \end{cases}
+            \end{equation*}
+            Besides, for any edge $ (ij) \in E $, we associated it with a function node $ e_{ij} $ whose compatibility function is $ \psi_{ij}(\sigma_i, \sigma_j) = \mathbb{I}(\sigma_i + \sigma_j < 2) $, which equals to $ 1 $ whenever $ i,j \in S $ and $ (ij) \in E $
+
+            A node set $ S \subseteq V $ is an independent set if and only if $ \psi_{ij}(\sigma_i^S, \sigma_j^S) = 1 $ for all distinct $ i,j \in S $.
+            The probability distribution that is uniform over all independent sets
+            \begin{equation} \label{eq:2_1}
+                P(\udl{\sigma})
+                = \frac{1}{Z} \prod_{(ij) \in E} \psi_{ij}(\sigma_i, \sigma_j)
+                = \frac{1}{Z} \prod_{(ij) \in E} \mathbb{I}(\sigma_i + \sigma_j < 2).
+            \end{equation}
+            
+            For example, suppose we have the following graph
+            \begin{center}
+            \tikzstyle{vertex}=[circle, draw, thick, minimum size=25pt,inner sep=0pt]
+            \tikzstyle{edge} = [draw, thick, -]
+            \tikzstyle{weight} = [font=\small]
+            \begin{tikzpicture}[scale=1.5, auto, swap]
+                \def\mysep{0.5}
+                \foreach \i/\x/\y in { 1/0/1.732, 2/-1/0, 3/1/0, 4/0/3.732, 5/-2.732/-1, 6/2.732/-1 }
+                    \node[vertex] (S\i) at (\x*\mysep, \y*\mysep) {$ \i $};
+                \foreach \source/ \dest in {1/2, 1/3, 2/3, 1/4, 2/5, 3/6}
+                    \path[edge] (S\source) --  (S\dest);
+            \end{tikzpicture}
+            \end{center}
+            The corresponding factor graph looks like
+            \begin{center}
+            \tikzstyle{var}=[circle, draw, thick, minimum size=25pt, inner sep=0pt, fill=yellow]
+            \tikzstyle{fun}=[rectangle, draw, thick, minimum size=25pt, inner sep=0pt, fill=cyan]
+            \tikzstyle{edge} = [draw, thick, -]
+            \begin{tikzpicture}[scale=1, auto, swap]
+                \def\mysep{2}
+                \foreach \i in {1,...,6}
+                    \node[var] (S\i) at (\i*\mysep, 0) {$ \sigma_\i $};
+                \foreach \i/\idx in {1/12, 2/13, 3/23, 4/14, 5/25, 6/36}
+                    \node[fun] (e\idx) at (\i*\mysep, -\mysep) {$ e_{\idx} $};
+                \foreach \source/ \dest in {12/1, 12/2, 13/1, 13/3, 23/2, 23/3,
+                                            14/1, 14/4, 25/2, 25/5, 36/3, 36/6}
+                    \path[edge] (e\source) -- (S\dest);
+            \end{tikzpicture}
+            \end{center}
+    \item   
+            Note that $ \abs{S} = (N + \sum_{i=1}^N \sigma_i^S) / 2 $.
+            If we want a probability distribution that gives a larger weight to larger independent sets, we can simply introduce a positive increasing function $ g(\cdot) $ and multiply $ g(\abs{S}) $ to the probability distribution in part (a), i.e.
+            \begin{equation} \label{eq:2_2}
+                P(\udl{\sigma})
+                = g \rdbrs{ \frac{N + \sum_{i=1}^N \sigma_i}{2} } \times \frac{1}{Z} \prod_{(ij) \in E} \mathbb{I}(\sigma_i + \sigma_j < 2).
+            \end{equation}
+            For example, we can choose $ g(x) = \exp \rdbrs{ \mu x } $ for some $ \mu > 0 $.
+            The last thing to notice is that the normalizing constant $ Z $ is different in eqn~\ref{eq:2_1} and eqn~\ref{eq:2_2}.
+    \end{enumerate}
+    \end{solution}
+
+\item[(3)]{\bf Matching problem}
+
+    Matching is another classical problem of graph theory. It is related
+    to a dimer problem in statistical physics. Given a  (unweighted,
+    undirected) graph $G(V,E)$ a
+    matching $M \subseteq E$ is defined as a subset of edges such that if $(ij) \in M$ then
+    no other edge that contains node $i$ or $j$ can be in $M$. In other
+    words a matching is a subset of edges such that no two edges of the
+    set share a node. 
+
+
+    (a) Write a probability distribution that is uniform over all
+    matchings on a given graph. (b) Write a probability distribution
+    that that gives a larger weight to larger matchings, where the
+    size of a matching is simply $|M|$. 
+
+    \begin{solution} $\,$ 
+    \begin{enumerate}[(a)]
+    \item   
+            First let's construct the factor graph for this problem.
+            We can use a length-$ \abs{E} $ spin configuration $ \udl{\sigma}^M $ to represent any set $ M \subseteq E $ by
+            \begin{equation*}
+                \sigma_{ij}^M = 
+                \begin{cases}
+                    +1, &\text{ if edge } (ij) \text{ is in } M\\
+                    -1, &\text{ if edge } (ij) \text{ is not in } M\\
+                \end{cases}.
+            \end{equation*}
+            Besides, for any node $ i \in V $, we associated it with a function node $ f_i $ whose compatibility function is
+            \begin{equation*}
+                \psi_i(\clbrs{ \sigma_{ij} }_{j \in \partial i}) = \mathbb{I} \rdbrs{ \frac{1}{2} \sum_{j \in \partial i} (\sigma_{ij}+1) \le 1 },
+            \end{equation*}
+            which equals to $ 1 $ whenever there is at most one edge in $ M $ that is incident to node $ i $.
+
+            An edge set $ M \subseteq E $ is a matching if and only if $ \psi_i(\clbrs{ \sigma_{ij}^M }_{j \in \partial i}) = 1 $ for all $ i \in S $.
+            The probability distribution that is uniform over all matchings on a given graph
+            \begin{equation}\label{eq:3_1}
+                P(\udl{\sigma})
+                = \frac{1}{Z} \prod_{i \in V} \psi_i(\clbrs{ \sigma_{ij} }_{j \in \partial i})
+                = \frac{1}{Z} \prod_{i \in V} \mathbb{I} \rdbrs{ \sum_{j \in \partial i} (\sigma_{ij}+1) \le 2 }.
+            \end{equation}
+
+            For example, suppose we have the same graph as last independent set problem.
+            The corresponding factor graph looks like
+            \begin{center}
+            \tikzstyle{var}=[circle, draw, thick, minimum size=25pt, inner sep=0pt, fill=yellow]
+            \tikzstyle{fun}=[rectangle, draw, thick, minimum size=25pt, inner sep=0pt, fill=cyan]
+            \tikzstyle{edge} = [draw, thick, -]
+            \begin{tikzpicture}[scale=1, auto, swap]
+                \def\mysep{2}
+                \foreach \i/\idx in {1/12, 2/13, 3/23, 4/14, 5/25, 6/36}
+                    \node[var] (e\idx) at (\i*\mysep, 0) {$ \sigma_{\idx} $};
+                \foreach \i in {1,...,6}
+                    \node[fun] (f\i) at (\i*\mysep, -\mysep) {$ f_\i $};
+                \foreach \source/ \dest in {12/1, 12/2, 13/1, 13/3, 23/2, 23/3,
+                                            14/1, 14/4, 25/2, 25/5, 36/3, 36/6}
+                    \path[edge] (e\source) -- (f\dest);
+            \end{tikzpicture}
+            \end{center}
+    \item   
+            Note that $ \abs{M} = (\abs{E} + \sum_{(ij) \in E} \sigma_{ij}^M) / 2 $.
+            If we want a probability distribution that gives a larger weight to larger matchings, we can simply introduce a positive increasing function $ g(\cdot) $ and multiply $ g(\abs{M}) $ to the probability distribution in part (a), i.e.
+            \begin{equation} \label{eq:3_2}
+                P(\udl{\sigma})
+                = g \rdbrs{ \frac{\abs{E} + \sum_{(ij) \in E} \sigma_{ij}}{2} } \times \frac{1}{Z} \prod_{i \in V} \mathbb{I} \rdbrs{ \sum_{j \in \partial i} (\sigma_{ij}+1) \le 2 }.
+            \end{equation}
+            For example, we can choose $ g(x) = \exp \rdbrs{ \mu x } $ for some $ \mu > 0 $.
+            The last thing to notice is that the normalizing constant $ Z $ is different in eqn~\ref{eq:3_1} and eqn~\ref{eq:3_2}.
+    \end{enumerate}
+    \end{solution}
+
+\end{itemize}
+\end{document}
