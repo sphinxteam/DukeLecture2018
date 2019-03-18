@@ -1,4 +1,4 @@
-## Statistical Physics For Optimization and Learning, Florent Krzakala & Lenka Zdeborová, Math 690-40
+## Main topics
 
 Interest in the methods and concepts of statistical physics is rapidly growing in fields as diverse as theoretical computer science, probability, machine learning, discrete mathematics, optimization and compressed sensing. This course will cover this rich and active interdisciplinary research landscape.
 
