@@ -12,5 +12,8 @@ The course is designed to be accessible to graduate students and researchers of 
  Information, Physics and Computation (Oxford Graduate Texts), 2009, M. Mézard, A. Montanari
  Statistical Physics of inference: Thresholds and algorithms, Advances in Physics 65, 5 2016, L. Zdeborová & F. Krzakala 
 
-### Overleadf lecture notes: the lectures notes of the course has freely [avaliable on overleaf](https://www.overleaf.com/16367764mcnrxmkntrkf)
+### Overleaf lecture notes: the lectures notes of the course has freely [avaliable on overleaf](https://www.overleaf.com/16367764mcnrxmkntrkf)
+
+
+### Download the [poster annoucement](Screenshot 2019-03-18 at 16.26.19.png)
 
