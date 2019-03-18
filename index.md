@@ -19,5 +19,5 @@ The course is designed to be accessible to graduate students and researchers of 
 
 ### Jupyter notebook tutorials: all the tutorial are [avaliable on github](https://github.com/sphinxteam/DukeLecture2018/tree/master/AMP-tuto)
 
-### Download the [poster annoucement](Screenshot 2019-03-18 at 16.26.19.png)
+### Download the [poster annoucement](DUKE.pdf)
 
