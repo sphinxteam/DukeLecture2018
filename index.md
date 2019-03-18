@@ -9,8 +9,9 @@ We will expose theoretical methods of analysis (replica, cavity, ...) algorithms
 The course is designed to be accessible to graduate students and researchers of all natural science and engineering disciplines with a basic knowledge of probability and analysis. Advanced training in any of the above fields is not requisite.
 
  References: 
- Information, Physics and Computation (Oxford Graduate Texts), 2009, M. Mézard, A. Montanari
- Statistical Physics of inference: Thresholds and algorithms, Advances in Physics 65, 5 2016, L. Zdeborová & F. Krzakala 
+ [Information, Physics and Computation (Oxford Graduate Texts)](https://web.stanford.edu/~montanar/RESEARCH/book.html), 2009, M. Mézard, A. Montanari
+ 
+[Statistical Physics of inference: Thresholds and algorithms](https://arxiv.org/abs/1511.02476), Advances in Physics 65, 5 2016, L. Zdeborová & F. Krzakala 
 
 ### Overleaf lecture notes: the lectures notes of the course has freely [avaliable on overleaf](https://www.overleaf.com/16367764mcnrxmkntrkf)
 
