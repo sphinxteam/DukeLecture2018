@@ -15,7 +15,7 @@ The course is designed to be accessible to graduate students and researchers of 
 
 ### Many thanks to [Mengke Lian](<mengke.lian@duke.edu>) who has been an amazing TA for this lecture.
 
-### Overleaf lecture notes: the lectures notes of the course has freely [avaliable on overleaf](https://www.overleaf.com/16367764mcnrxmkntrkf)
+### Overleaf lecture notes: the lectures notes of the course has freely [avaliable on overleaf](https://www.overleaf.com/read/smzsnjwgrntb)
 
 ### Exercices: all the assigments and  corrections are [avaliable on github](https://github.com/sphinxteam/DukeLecture2018/tree/master/exercices)
 
